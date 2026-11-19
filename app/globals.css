@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+
+:root {
+  --cream: #FFF9F2;
+  --paper-cream: #FFFCF7;
+  --white: #FFFFFF;
+  --baby: #FCE4EC;
+  --baby-pink: #F8BBD0;
+  --pink: #F06292;
+  --soft-rose: #EC407A;
+  --burg: #7A1F3D;
+  --burg-deep: #4A0E23;
+  --wine: #880E4F;
+  --ink: #2C1B20;
+  --muted: #7E656B;
+  --gold: #D4AF37;
+  --gold-light: #FFF8E7;
+
+  /* Scrapbook textures & shadows */
+  --washi-pink: rgba(244, 143, 177, 0.78);
+  --washi-gold: rgba(230, 190, 115, 0.75);
+  --washi-cream: rgba(255, 243, 224, 0.85);
+
+  --shadow-paper: 0 4px 6px -1px rgba(122, 31, 61, 0.07), 0 10px 25px -3px rgba(122, 31, 61, 0.12);
+  --shadow-float: 0 15px 35px -5px rgba(122, 31, 61, 0.18), 0 0 15px rgba(240, 98, 146, 0.15);
+  --shadow-polaroid: 0 12px 28px -4px rgba(74, 14, 35, 0.16), 0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--body, 'Nunito'), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(var(--baby-pink) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(240, 98, 146, 0.15) 1.2px, transparent 1.2px);
+  background-size: 28px 28px, 56px 56px;
+  background-position: 0 0, 14px 14px;
+}
+
+/* Typography Helpers */
+.hand {
+  font-family: var(--hand, 'Caveat'), cursive;
+  color: var(--burg);
+  line-height: 1.25;
+}
+
+.disp {
+  font-family: var(--disp, 'Fredoka'), sans-serif;
+}
+
+.serif-italic {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+/* Scrapbook Paper Texture & Layers */
+.scrapbook-page {
+  position: relative;
+  background: var(--paper-cream);
+  border-radius: 12px;
+  box-shadow: var(--shadow-paper);
+  border: 1px solid rgba(248, 187, 208, 0.6);
+  background-image: 
+    linear-gradient(to right, rgba(122, 31, 61, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(122, 31, 61, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Decorative Washi Tapes */
+.tape-top {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 130px;
+  height: 28px;
+  background: var(--washi-pink);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+  z-index: 10;
+  clip-path: polygon(4% 0%, 96% 0%, 100% 100%, 0% 100%);
+  border-left: 2px dashed rgba(255,255,255,0.6);
+  border-right: 2px dashed rgba(255,255,255,0.6);
+}
+
+.tape-corner-left {
+  position: absolute;
+  top: -10px;
+  left: -14px;
+  transform: rotate(-38deg);
+  width: 75px;
+  height: 24px;
+  background: var(--washi-pink);
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border-left: 1px dashed rgba(255,255,255,0.5);
+  border-right: 1px dashed rgba(255,255,255,0.5);
+}
+
+.tape-corner-right {
+  position: absolute;
+  top: -10px;
+  right: -14px;
+  transform: rotate(35deg);
+  width: 75px;
+  height: 24px;
+  background: var(--washi-gold);
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border-left: 1px dashed rgba(255,255,255,0.5);
+  border-right: 1px dashed rgba(255,255,255,0.5);
+}
+
+/* Stamp Badge */
+.postage-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border: 2px dashed var(--soft-rose);
+  background: #FFF0F4;
+  color: var(--burg);
+  font-family: var(--disp, 'Fredoka'), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* Stickers & Doodles */
+.sticker {
+  display: inline-block;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.08));
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.sticker:hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Buttons */
+.btn-scrapbook-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 30px;
+  font-family: var(--disp, 'Fredoka'), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--burg) 0%, var(--wine) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(122, 31, 61, 0.28);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-scrapbook-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(122, 31, 61, 0.38);
+}
+
+.btn-scrapbook-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-scrapbook-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--disp, 'Fredoka'), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--burg);
+  background: #FFFDF9;
+  border: 2px dashed var(--pink);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-scrapbook-secondary:hover {
+  background: #FFF0F4;
+  border-style: solid;
+  transform: translateY(-2px);
+}
+
+/* Polaroid Photo Card */
+.polaroid-scrapbook {
+  background: #FFFFFF;
+  padding: 14px 14px 20px;
+  border-radius: 3px;
+  box-shadow: var(--shadow-polaroid);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.polaroid-scrapbook:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  box-shadow: var(--shadow-float);
+  z-index: 15;
+}
+
+.polaroid-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/4.8;
+  background: #FFF2F5;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid rgba(122, 31, 61, 0.08);
+}
+
+.polaroid-note {
+  font-family: var(--hand, 'Caveat'), cursive;
+  font-size: 21px;
+  color: var(--burg);
+  margin-top: 12px;
+  text-align: center;
+  line-height: 1.25;
+}
+
+/* 3D Flip Message Card */
+.scrapbook-flip-card {
+  perspective: 1200px;
+  cursor: pointer;
+  min-height: 155px;
+}
+
+.scrapbook-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+.scrapbook-flip-card.is-flipped .scrapbook-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front-side, .flip-back-side {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 18px;
+}
+
+.flip-front-side {
+  background: #FFFFFF;
+  border: 2px dashed rgba(240, 98, 146, 0.6);
+  box-shadow: var(--shadow-paper);
+}
+
+.flip-back-side {
+  background: linear-gradient(135deg, #FFF0F4 0%, #FCE4EC 100%);
+  border: 2px solid var(--soft-rose);
+  color: var(--burg);
+  transform: rotateY(180deg);
+  box-shadow: var(--shadow-paper);
+}
+
+/* Wax Seal Button */
+.wax-seal-scrapbook {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 35% 35%, #B71C1C 0%, #7A1F3D 60%, #4A0E23 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF5F7;
+  font-family: var(--hand, 'Caveat'), cursive;
+  font-size: 28px;
+  font-weight: bold;
+  box-shadow: 0 6px 14px rgba(74, 14, 35, 0.4), inset 0 2px 4px rgba(255,255,255,0.4);
+  border: 2px solid rgba(255,255,255,0.3);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.wax-seal-scrapbook:hover {
+  transform: scale(1.12) rotate(-8deg);
+  box-shadow: 0 8px 20px rgba(74, 14, 35, 0.5);
+}
+
+/* Floating Animations */
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 4px 10px rgba(122, 31, 61, 0.2)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 6px 16px rgba(240, 98, 146, 0.4)); }
+}
+
+.soft-pulse {
+  animation: softPulse 2.8s infinite ease-in-out;
+}
+
+@keyframes gentleDrift {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.gentle-drift {
+  animation: gentleDrift 4s infinite ease-in-out;
+}
+
+/* Balloon Float Animation - Starts from below screen and floats up smoothly */
+@keyframes floatBalloonUp {
+  0% {
+    transform: translateY(105vh) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) translateX(var(--sway, 18px)) rotate(5deg);
+    opacity: 0.92;
+  }
+  92% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-20vh) translateX(calc(var(--sway, 18px) * -1)) rotate(-5deg);
+    opacity: 0;
+  }
+}
+
+.floating-balloon {
+  position: absolute;
+  bottom: 0;
+  animation-name: floatBalloonUp;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  will-change: transform, opacity;
+}
+
+/* Lightbox Modal */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 27, 32, 0.88);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Floating Scrap Papers */
+@keyframes paperFloatInLeft {
+  0% {
+    transform: translate(-120vw, calc(-50vh + 100px)) rotate(-45deg) scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot, -3deg)) scale(1);
+    opacity: 0.95;
+  }
+}
+
+@keyframes paperFloatInRight {
+  0% {
+    transform: translate(120vw, calc(-50vh - 80px)) rotate(45deg) scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot, 4deg)) scale(1);
+    opacity: 0.95;
+  }
+}
+
+@keyframes paperFloatInTop {
+  0% {
+    transform: translate(calc(-50vw + 60px), -120vh) rotate(-30deg) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot, -2deg)) scale(1);
+    opacity: 0.95;
+  }
+}
+
+@keyframes paperFloatInBottom {
+  0% {
+    transform: translate(calc(50vw - 40px), 120vh) rotate(35deg) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot, 3deg)) scale(1);
+    opacity: 0.95;
+  }
+}
+
+.floating-scrap-paper {
+  position: absolute;
+  pointer-events: none;
+  background: #FFFDF9;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(122, 31, 61, 0.22);
+  border: 1px dashed rgba(240, 98, 146, 0.5);
+  padding: 12px 16px;
+  font-family: var(--hand, 'Caveat'), cursive;
+  font-size: 20px;
+  color: var(--burg);
+  z-index: 105;
+}
+
+.scrap-from-left {
+  animation: paperFloatInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.scrap-from-right {
+  animation: paperFloatInRight 1.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.scrap-from-top {
+  animation: paperFloatInTop 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.scrap-from-bottom {
+  animation: paperFloatInBottom 1.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Center Assembled Grand Birthday Letter */
+@keyframes letterAssembleCenter {
+  0% {
+    transform: scale(0.3) rotate(-12deg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  70% {
+    transform: scale(1.04) rotate(1deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.assembled-letter-card {
+  animation: letterAssembleCenter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(-0.8deg) translateX(0); }
+  20%, 60% { transform: rotate(-0.8deg) translateX(-8px); }
+  40%, 80% { transform: rotate(-0.8deg) translateX(8px); }
+}
+
+.shake-animation {
+  animation: shake 0.4s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
